@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/src/assets/icons/hospital-dynamics.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Hospital dynamics</title>
+</head>
+
+<body>
+
+<header class="header">
+        <img src="/src/assets/icons/hospital-dynamics.svg" alt="logo" class="logo"/>
+</header>
+
+<div class="container"> 
+
+    <h3>Historial médico</h3>
+
+    <div class="container-form ">
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                <form class="form-container" id="submitForm">
+
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <label for="name">Nombre</label>
+                        <input class="form-control" id="name"  name="name" type="text" placeholder="Juan" required>
+                      
+                    </div>
+             
+
+                <div class="form-group col-md-6">
+                    <label for="lastName">Apellido</label>
+                    <input class="form-control" id="lastName"  name="lastName" type="text" placeholder="Perez" required>
+                </div>
+
+            </div>
+
+            <div class="form-row"> 
+                <div class="form-group col-md-6">
+                    <label for="lastName">Cédula</label>
+                    <input class="form-control" id="cedula"  name="cedula" type="text" required >
+                    <p class="cedula-message" style="display: none;">Cédula Inválida</p>
+                    <p class="error-message" style="display: none;">Ingrese valores numéricos</p>
+
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label for="lastName">Teléfono</label>
+                    <input class="form-control" id="phone"  name="phone"type="text" placeholder="999999999" required>
+                    <p class="error-numeric-message" style="display: none;">Ingrese valores numéricos</p>
+
+                </div>
+
+            </div>
+            
+            <div class="form-row"> 
+                <div class="form-group col-md-6">
+                    <label for="dateofbirth">Fecha de Nacimiento</label>
+                        <input class="form-control"  type="date" name="dateofbirth" id="dateofbirth" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="dateofbirth">Hora de Nacimiento</label>
+                        <input class="form-control" type="time" id="timeBirth" name="timeBirth" required />
+                </div>
+
+             </div>
+
+             <div class="form-row"> 
+
+                <div class="form-group col-md-4">
+                    <label for="country">País</label>
+                    <div class="relative">
+                        <select class="form-control" id="country" name="country">
+                            <!-- <option>Ecuador</option>
+                            <option>Argentina</option>
+                            <option>España</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="state">Provincia</label>
+                    <div class="relative">
+                        <select class="form-control" id="state" name="state">
+                            <!-- <option>Azuay</option>
+                            <option>Bolívar</option>
+                            <option>Cañar</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="city">Ciudad</label>
+                    <div class="relative">
+                        <select class="form-control" id="city"  name="city">
+                            <!-- <option>Quito</option>
+                            <option>Guayaquil</option>
+                            <option>Cuenca</option> -->
+                        </select>
+                    </div>
+                </div>
+                </div>
+
+                 <div class="form-row"> 
+        
+                <div class="form-group col-12">
+                   
+                    <label for="lastName">Dirección</label>
+                    <input class="form-control" id="addres1"  name="addres1" type="mainStreet" placeholder="Calle Principal" required>
+                    
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="lastName"></label>
+                    <input class="form-control" id="addres2"  name="addres2" type="secondStreet" placeholder="Calle Secundaria">
+                </div>
+                </div>
+          
+                <div class="form-group container-button ">
+                    <button type="submit" id="btn-submit" class="btn btn-primary">Registrar</button>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Subir Archivo</h4>
+                    <div id="image-preview" class="mt-3" style="position: relative;">
+                        <img id="preview-image" src="./src/assets/icons/profile.png" alt="Imagen previa" style="max-width: 100%; max-height: 200px;">
+                    </div>
+
+                    <label for="inputFile" class="custom-file-upload">
+                        <button class="btn btn-primary">Elegir</button>
+                        <input type="file" class="form-control-file" id="inputFile" style="display: none;">  
+                    </label>
+                    <div id="file-name"></div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <h3>Consultas</h3>
+        </div>
+        <div class="col">
+            <div class="container-button">
+                <button type="button" id="btn-addConsulta"  class="btn btn-primary" data-toggle="modal" data-target="#modalAddConsultation">Agregar consulta</button>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="card">
+        <div class="card-body"> 
+
+            <table class="table" id="consultaTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Paciente</th> 
+                       
+                        <th>Fecha de consulta</th>
+                        <th>Hora de consulta</th>
+                        <!-- <th>Acciones</th>  -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <th scope="row">1</th>
+                        <td>Juan Perez</td>
+                        <td>4....</td>
+                        <td>2024-04-24</td>
+                        <td>09:00 AM</td>
+                       
+                    </tr>
+
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Paula Vega</td>
+                        <td>2024-04-24</td>
+                        <td>09:00 AM</td>
+                    </tr> -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col">
+            <h3>Cargas familiares</h3>
+        </div>
+        <div class="col">
+            <div class="container-button">
+                <button type="button" id="btn-addConsulta"  class="btn btn-primary" data-toggle="modal" data-target="#modalAddFamily">Agregar miembro</button>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="card">
+        <div class="card-body"> 
+
+            <table class="table" id="familyTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Paciente</th>
+                        <th>Parentesco</th>
+                        <th>Nombre carga familiar</th>
+                        <th>Cédula carga familiar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalAddConsultation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Agregar consulta</h4>
+          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <form id="consultationForm">
+            
+            <div class="form-group">
+            <label for="patient">Paciente</label>
+                    <div class="relative">
+                        <select class="form-control" id="patientSelect" name="patientSelect" required>
+                            <!-- <option>Ecuador</option>
+                            <option>Argentina</option>
+                            <option>España</option> -->
+                        </select>
+                    </div>
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label for="dateofbirth">Fecha de consulta</label>
+                    <input class="form-control"  type="date" name="dateMedicalConsultation" id="medicalConsultation" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="dateofbirth">Hora de consulta</label>
+                    <input class="form-control" type="time" id="timeMedicalConsultation" name="timeMedicalConsultation" required />
+            </div>
+
+        </form>
+
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="saveConsultation()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modalAddFamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Agregar carga familiar</h4>
+          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+
+            <form id="familyForm">
+            
+            
+            
+            <div class="form-group">
+            <label for="patient">Paciente</label>
+                    <div class="relative">
+                        <select class="form-control" id="patientSelect" name="patientSelect" required>
+                            <!-- <option>Ecuador</option>
+                            <option>Argentina</option>
+                            <option>España</option> -->
+                        </select>
+                    </div>
+            </div>
+
+
+
+            <div class="form-group col-6">
+                <label for="patient">Parentesco</label>
+                        <div class="relative">
+                            <select class="form-control" id="parentesco" name="parentesco" required>
+                                <option>Padre</option>
+                                <option>Madre</option>
+                                <option>Hija(o)</option>
+                                <option>Ñieta(o)</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                </div>
+
+               
+
+            <div class="form-group col-md-6">
+                <label for="nameFamily">Nombre</label>
+                <input class="form-control" id="nameFamily"  name="nameFamily" type="text" placeholder="Juan" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="lastNameFamily">Apellido</label>
+                <input class="form-control" id="lastNameFamily"  name="lastNameFamily" type="text" placeholder="Perez" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedulaFamily">Cédula</label>
+                <input class="form-control" id="cedulaFamily"  name="cedulaFamily" type="text" required >
+            </div>
+
+        </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="saveFamily()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/src/scripts/ClinicHistory.js" defer></script>
+
+
+</body>
+
+</html>
